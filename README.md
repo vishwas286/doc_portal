@@ -2,3 +2,6 @@
 2 Embedding model  -openAi, hugging face,gemini
 3 vector database- inmemory ,ondisk,cloudbase(aws bedrock)
   AWS secret manager will see it (industry practice) cloud is very subjective 
+
+Arena Leader Board 
+Leaderboard embeding model

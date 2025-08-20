@@ -6,3 +6,4 @@ python-dotenv
 langchain_google_genai
 pypdf
 langchain-community
+faiss-cpu==1.11.0.post1
