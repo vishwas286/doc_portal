@@ -1,0 +1,13 @@
+prefix=D:/Work_Data/Doc_Rag_Analyser/doc_portal/venv/Library
+exec_prefix=D:/Work_Data/Doc_Rag_Analyser/doc_portal/venv/Library
+libdir=D:/Work_Data/Doc_Rag_Analyser/doc_portal/venv/Library/lib
+sharedlibdir=D:/Work_Data/Doc_Rag_Analyser/doc_portal/venv/Library/lib
+includedir=D:/Work_Data/Doc_Rag_Analyser/doc_portal/venv/Library/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
