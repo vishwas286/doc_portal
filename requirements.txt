@@ -9,3 +9,4 @@ langchain-community
 faiss-cpu==1.11.0.post1
 structlog
 pymuPDF
+structlog
