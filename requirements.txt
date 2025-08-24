@@ -11,3 +11,4 @@ structlog
 pymuPDF
 structlog
 pydantic
+pandas
