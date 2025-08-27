@@ -18,3 +18,4 @@ langchain-core[tracing]
 pytest
 streamlit
 faiss
+docx2txt
