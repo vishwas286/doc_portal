@@ -12,3 +12,4 @@ pymuPDF
 structlog
 pydantic
 pandas
+fitz
