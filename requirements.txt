@@ -13,3 +13,8 @@ structlog
 pydantic
 pandas
 fitz
+streamlit
+langchain-core[tracing]
+pytest
+streamlit
+faiss
