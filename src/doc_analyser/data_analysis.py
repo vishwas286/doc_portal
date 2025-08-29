@@ -6,8 +6,7 @@ from exception.custom_exception import DocumentPortalException
 from model.model import *
 from langchain_core.output_parsers import JsonOutputParser
 from langchain.output_parsers import OutputFixingParser
-from prompt.promt_pre import PROMPT_REGISTRY
-
+from prompt.promt_pre import PROMPT_REGISTRY # type: ignore
 
 class DocumentAnalyzer:
     """
@@ -15,7 +14,6 @@ class DocumentAnalyzer:
     Automatically logs all actions and supports session-based organization.
     """
     def __init__(self):
-        
         self.log = CustomLogger().get_logger(__name__)
         try:
             self.loader=ModelLoader()
@@ -25,7 +23,7 @@ class DocumentAnalyzer:
             self.parser = JsonOutputParser(pydantic_object=Metadata)
             self.fixing_parser = OutputFixingParser.from_llm(parser=self.parser, llm=self.llm)
             
-            self.prompt = PROMPT_REGISTRY("document_analysis")
+            self.prompt = PROMPT_REGISTRY["document_analysis"]
             
             self.log.info("DocumentAnalyzer initialized successfully")
             
@@ -33,6 +31,7 @@ class DocumentAnalyzer:
         except Exception as e:
             self.log.error(f"Error initializing DocumentAnalyzer: {e}")
             raise DocumentPortalException("Error in DocumentAnalyzer initialization", sys)
+        
         
     
     def analyze_document(self, document_text:str)-> dict:
@@ -55,4 +54,6 @@ class DocumentAnalyzer:
 
         except Exception as e:
             self.log.error("Metadata analysis failed", error=str(e))
-            raise DocumentPortalException("Metadata extraction failed") from e
+            raise DocumentPortalException("Metadata extraction failed",sys)
+        
+    
