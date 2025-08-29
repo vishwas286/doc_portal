@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
-
+from utils.document_ops import FastAPIFileAdapter,read_pdf_via_handler
 from src.data_ingestion.data_ingestion import (
     DocHandler,
     DocumentComparator,
@@ -51,7 +51,7 @@ async def analyze_document(file: UploadFile = File(...)) -> Any:
     try:
         dh = DocHandler()
         saved_path = dh.save_pdf(FastAPIFileAdapter(file))
-        text = _read_pdf_via_handler(dh, saved_path)
+        text = read_pdf_via_handler(dh, saved_path)
         analyzer = DocumentAnalyzer()
         result = analyzer.analyze_document(text)
         return JSONResponse(content=result)
@@ -138,23 +138,6 @@ async def chat_query(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Query failed: {e}")
 
-
-# ---------- Helpers ----------
-class FastAPIFileAdapter:
-    """Adapt FastAPI UploadFile -> .name + .getbuffer() API"""
-    def __init__(self, uf: UploadFile):
-        self._uf = uf
-        self.name = uf.filename
-    def getbuffer(self) -> bytes:
-        self._uf.file.seek(0)
-        return self._uf.file.read()
-
-def _read_pdf_via_handler(handler: DocHandler, path: str) -> str:
-    if hasattr(handler, "read_pdf"):
-        return handler.read_pdf(path)  # type: ignore
-    if hasattr(handler, "read_"):
-        return handler.read_(path)  # type: ignore
-    raise RuntimeError("DocHandler has neither read_pdf nor read_ method.")
 
 
 
