@@ -1,27 +1,19 @@
-import logging
 import os
-import structlog # pyright: ignore[reportMissingImports]
+import logging
 from datetime import datetime
-
+import structlog
 
 class CustomLogger:
-    def __init__(self,log_dir="logs"):
+    def __init__(self, log_dir="logs"):
         # Ensure logs directory exists
         self.logs_dir = os.path.join(os.getcwd(), log_dir)
         os.makedirs(self.logs_dir, exist_ok=True)
 
-        # Create timestamped log file name
+        # Timestamped log file (for persistence)
         log_file = f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
         self.log_file_path = os.path.join(self.logs_dir, log_file)
 
-        # # Configure logging
-        # logging.basicConfig(
-        #     filename=log_file_path,
-        #     format="[ %(asctime)s ] %(levelname)s %(name)s (line:%(lineno)d) - %(message)s",
-        #     level=logging.INFO,
-        # )
-        
-    def get_logger(self,name=__file__):
+    def get_logger(self, name=__file__):
         logger_name = os.path.basename(name)
 
         # Configure logging for console + file (both JSON)
@@ -39,6 +31,7 @@ class CustomLogger:
             handlers=[console_handler, file_handler]
         )
 
+        # Configure structlog for JSON structured logging
         structlog.configure(
             processors=[
                 structlog.processors.TimeStamper(fmt="iso", utc=True, key="timestamp"),
@@ -51,8 +44,10 @@ class CustomLogger:
         )
 
         return structlog.get_logger(logger_name)
-    
-if __name__ == "__main__":
-    logger = CustomLogger().get_logger(__file__)
-    logger.info("User uploaded a file", user_id=123, filename="report.pdf")
-    logger.error("Failed to process PDF", error="File not found", user_id=123)
+
+
+# # --- Usage Example ---
+# if __name__ == "__main__":
+#     logger = CustomLogger().get_logger(__file__)
+#     logger.info("User uploaded a file", user_id=123, filename="report.pdf")
+#     logger.error("Failed to process PDF", error="File not found", user_id=123)

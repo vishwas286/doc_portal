@@ -11,7 +11,7 @@ from typing import Iterable, List
 
 from logger.custom_logger import CustomLogger
 from exception.custom_exception import DocumentPortalException
-log = CustomLogger().get_logger(__name__)
+from logger import GLOBAL_LOGGER as log
 SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt"}
 
 # ----------------------------- #
