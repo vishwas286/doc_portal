@@ -1,5 +1,45 @@
 Metadata-Version: 2.4
-Name: doc-portal
+Name: doc_portal
 Version: 0.1
-Author: vishwas soni
+Summary: An intelligent document analysis and comparison system powered by LLMs
+Author: Vishwas Soni
+Classifier: Programming Language :: Python :: 3.10
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: langchain==0.3.27
+Requires-Dist: langchain-community==0.3.27
+Requires-Dist: langchain-core==0.3.72
+Requires-Dist: langchain-groq==0.3.6
+Requires-Dist: langchain-google-genai==2.1.8
+Requires-Dist: faiss-cpu==1.11.0.post1
+Requires-Dist: fastapi==0.116.1
+Requires-Dist: uvicorn==0.35.0
+Requires-Dist: python-dotenv==1.1.1
+Requires-Dist: python-multipart==0.0.20
+Requires-Dist: PyMuPDF==1.26.3
+Requires-Dist: structlog==25.4.0
+Requires-Dist: docx2txt==0.9
+Requires-Dist: ipykernel==6.30.0
+Requires-Dist: streamlit==1.47.1
+Requires-Dist: pytest==8.4.1
+Provides-Extra: dev
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: pylint; extra == "dev"
+Requires-Dist: ipykernel; extra == "dev"
 Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+1.LLM model - groq , openAI(paid), gemini,hugging face (free),ollama (system wil get slow)
+2 Embedding model  -openAi, hugging face,gemini
+3 vector database- inmemory ,ondisk,cloudbase(aws bedrock)
+  AWS secret manager will see it (industry practice) cloud is very subjective 
+
+Arena Leader Board 
+Leaderboard embeding model

@@ -3,6 +3,7 @@ setup.py
 doc_portal.egg-info/PKG-INFO
 doc_portal.egg-info/SOURCES.txt
 doc_portal.egg-info/dependency_links.txt
+doc_portal.egg-info/requires.txt
 doc_portal.egg-info/top_level.txt
 exception/__init__.py
 exception/custom_exception.py
